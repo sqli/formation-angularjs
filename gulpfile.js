@@ -55,7 +55,7 @@ gulp.task('template', function () {
 
 gulp.task('dist', ['clean', 'html', 'template', 'i18n', 'stub']);
 
-gulp.task('deploy', ['test', 'dist'], function () {
+gulp.task('deploy', ['dist'], function () {
     return gulp.src('dist/**/*').pipe($.ghPages({
         remoteUrl: bower.repository.url
     }));
