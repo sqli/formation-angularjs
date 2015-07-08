@@ -9,71 +9,61 @@
     "lat": 43.61793,
     "lng": 1.43887
   },
-  "posts": [{
+  "tiles": [{
     "id": 1,
     "title": "My Video Title 1",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/chaps_1x.jpg",
     "src": "http://sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-    "likes": 987655,
+    "likes": 7,
     "date": 1234567890123
   },{
     "id": 2,
     "title": "My Video Title 2",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/everycowboy_dribbbleready_shot.jpg",
     "src": "http://techslides.com/demos/sample-videos/small.mp4",
-    "likes": 45,
+    "likes": 1,
     "date": 1234567890123
   },{
     "id": 3,
     "title": "My Video Title 3",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/ithinkican_01.jpg",
     "src": "http://techslides.com/demos/sample-videos/small.mp4",
-    "likes": 4567,
+    "likes": 1,
     "date": 1234567890123
   },{
     "id": 4,
     "title": "My Video Title 4",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/m.jpg",
     "src": "http://sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-    "likes": 987654,
+    "likes": 7,
     "date": 1234567890123
   },{
     "id": 5,
     "title": "My Video Title 5",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/sketch_1x.jpg",
     "src": "http://techslides.com/demos/sample-videos/small.mp4",
-    "likes": 2,
+    "likes": 4,
     "date": 1234567890123
   },{
     "id": 6,
     "title": "My Video Title 6",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/raspberry.jpg",
     "src": "http://sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-    "likes": 467,
+    "likes": 4,
     "date": 1234567890123
   },{
     "id": 7,
     "title": "My Video Title 7",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/sketch_1x.jpg",
     "src": "http://techslides.com/demos/sample-videos/small.mp4",
-    "likes": 294,
+    "likes": 1,
     "date": 1234567890123
   },{
     "id": 8,
     "title": "My Video Title 8",
+    "thumbnail": "http://hasinhayder.github.io/ImageCaptionHoverAnimation/img/raspberry.jpg",
     "src": "http://sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-    "likes": 23,
-    "date": 1234567890123
-  },{
-    "id": 9,
-    "title": "My Video Title 9",
-    "src": "http://sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-    "likes": 84,
-    "date": 1234567890123
-  },{
-    "id": 10,
-    "title": "My Video Title 10",
-    "src": "http://techslides.com/demos/sample-videos/small.mp4",
-    "likes": 49,
-    "date": 1234567890123
-  },{
-    "id": 11,
-    "title": "My Video Title 11",
-    "src": "http://techslides.com/demos/sample-videos/small.mp4",
-    "likes": 12,
+    "likes": 1,
     "date": 1234567890123
   }]
 }

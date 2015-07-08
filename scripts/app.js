@@ -161,30 +161,30 @@ angular.module('app').factory('Map', function(){
 });
 angular.module('app').factory('VideoTiles', function(){
 
-    var computeMinMaxMean = function(posts) {
+    var computeMinMaxMean = function(tiles) {
         var minMaxMin = {
             MIN : Number.MAX_VALUE,
             MAX : -Number.MAX_VALUE,
             MEAN: 0
         };
 
-        for(var i = 0; i < posts.length; i++){
-            if(posts[i].likes > minMaxMin.MAX){
-                minMaxMin.MAX = posts[i].likes;
+        for(var i = 0; i < tiles.length; i++){
+            if(tiles[i].likes > minMaxMin.MAX){
+                minMaxMin.MAX = tiles[i].likes;
             }
-            if(posts[i].likes < minMaxMin.MIN){
-                minMaxMin.MIN = posts[i].likes;
+            if(tiles[i].likes < minMaxMin.MIN){
+                minMaxMin.MIN = tiles[i].likes;
             }
-            minMaxMin.MEAN = ((minMaxMin.MEAN * i) + posts[i].likes) / (i+1);
+            minMaxMin.MEAN = ((minMaxMin.MEAN * i) + tiles[i].likes) / (i+1);
         }
         return minMaxMin;
     }
 
     return {
-        buildGridModel: function(posts) {
-            var minMaxMean = computeMinMaxMean(posts);
+        buildGridModel: function(tiles) {
+            var minMaxMean = computeMinMaxMean(tiles);
             var results = [];
-            posts.forEach(function(post){
+            tiles.forEach(function(post){
 
                 var sizes = [{
                     row: 1,
@@ -200,7 +200,7 @@ angular.module('app').factory('VideoTiles', function(){
                 var size = sizes[0];
                 if(post.likes < minMaxMean.MEAN){
                     size = sizes[0];
-                }else if(post.likes >= minMaxMean.MEAN && post.likes < (post.likes + (minMaxMean.MAX - minMaxMean.MIN) / 3)){
+                }else if(post.likes >= minMaxMean.MEAN && post.likes < minMaxMean.MEAN + minMaxMean.MIN){
                     size = sizes[1];
                 }else{
                     size = sizes[2];
@@ -238,6 +238,17 @@ angular.module('app').directive('userCardLight', function($stateParams){
             };
         }
     }
+});
+angular.module('app').controller('userVideoTileCtrl', function($scope, $mdDialog, $sce){
+
+    $scope.close = function(){
+        $mdDialog.hide();
+    };
+
+    $scope.transformUrl = function(url){
+        return $sce.trustAsResourceUrl(url);
+    };
+
 });
 angular.module('app').controller('HomeCtrl', function($scope, $interval){
 
@@ -289,41 +300,53 @@ angular.module('app').controller('HomeCtrl', function($scope, $interval){
     };
 
 });
-angular.module('app').controller('UserCtrl', function(settings, $scope, User, $stateParams, $mdToast, $translate, Map, VideoTiles, $sce){
+angular.module('app').controller('UserCtrl',
 
-    User.get({id: $stateParams.id}).$promise.then(function(user){
-        $scope.user = user;
-        $scope.map = Map.markerConfig(user.position.lat, user.position.lng);
-        $scope.tiles = VideoTiles.buildGridModel(user.posts);
-    });
+    function(settings, $scope, User, $stateParams, $mdToast, $translate, Map, VideoTiles, $mdDialog){
 
-    $scope.transformUrl = function(url){
-        return $sce.trustAsResourceUrl(url);
-    };
+        User.get({id: $stateParams.id}).$promise.then(function(user){
+            $scope.user = user;
+            $scope.map = Map.markerConfig(user.position.lat, user.position.lng);
+            $scope.tiles = VideoTiles.buildGridModel(user.tiles);
+        });
 
-    $scope.action1 = function(){
-        $mdToast.show(
-            $mdToast.simple()
-                .content($translate.instant('user.action1.toast.text'))
-                .position(settings.toast.position)
-                .hideDelay(settings.toast.hideDelay)
-        );
-    };
-
-    $scope.delete = function(user) {
-        var toast = $mdToast.simple()
-            .content($translate.instant('user.delete.toast.text', {name: user.name}))
-            .action($translate.instant('user.delete.toast.text.action'))
-            .highlightAction(true)
-            .position(settings.toast.position);
-        $mdToast.show(toast).then(function() {
+        $scope.action1 = function(){
             $mdToast.show(
                 $mdToast.simple()
-                    .content($translate.instant('user.delete.toast.text.cancel.confirmation', {name: user.name}))
+                    .content($translate.instant('user.action1.toast.text'))
                     .position(settings.toast.position)
                     .hideDelay(settings.toast.hideDelay)
             );
-        });
-    };
+        };
 
-});
+        $scope.delete = function(user) {
+            var toast = $mdToast.simple()
+                .content($translate.instant('user.delete.toast.text', {name: user.name}))
+                .action($translate.instant('user.delete.toast.text.action'))
+                .highlightAction(true)
+                .position(settings.toast.position);
+            $mdToast.show(toast).then(function() {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content($translate.instant('user.delete.toast.text.cancel.confirmation', {name: user.name}))
+                        .position(settings.toast.position)
+                        .hideDelay(settings.toast.hideDelay)
+                );
+            });
+        };
+
+        $scope.showVideo = function(ev, scope){
+            $mdDialog.show({
+                controller: 'userVideoTileCtrl',
+                templateUrl: 'src/common/directive/user-video-tile/view.html',
+                parent: angular.element(document.body),
+                scope: scope,
+                targetEvent: ev,
+            })
+            .then(function() {
+
+            });
+        };
+
+    }
+);

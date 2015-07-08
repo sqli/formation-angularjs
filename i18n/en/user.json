@@ -6,5 +6,6 @@
   "user.action1.toast.text": "TODO action 1 behaviors",
   "user.delete.toast.text": "The {{name}} card was deleted",
   "user.delete.toast.text.action": "cancel",
-  "user.delete.toast.text.cancel.confirmation": "The {{name}} card was restored"
+  "user.delete.toast.text.cancel.confirmation": "The {{name}} card was restored",
+  "user.tile.dialog.exit": "Exit to video"
 }
