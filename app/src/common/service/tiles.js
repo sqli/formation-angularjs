@@ -1,29 +1,29 @@
 angular.module('app').factory('VideoTiles', function(){
 
-    var computeMinMaxMean = function(posts) {
+    var computeMinMaxMean = function(tiles) {
         var minMaxMin = {
             MIN : Number.MAX_VALUE,
             MAX : -Number.MAX_VALUE,
             MEAN: 0
         };
 
-        for(var i = 0; i < posts.length; i++){
-            if(posts[i].likes > minMaxMin.MAX){
-                minMaxMin.MAX = posts[i].likes;
+        for(var i = 0; i < tiles.length; i++){
+            if(tiles[i].likes > minMaxMin.MAX){
+                minMaxMin.MAX = tiles[i].likes;
             }
-            if(posts[i].likes < minMaxMin.MIN){
-                minMaxMin.MIN = posts[i].likes;
+            if(tiles[i].likes < minMaxMin.MIN){
+                minMaxMin.MIN = tiles[i].likes;
             }
-            minMaxMin.MEAN = ((minMaxMin.MEAN * i) + posts[i].likes) / (i+1);
+            minMaxMin.MEAN = ((minMaxMin.MEAN * i) + tiles[i].likes) / (i+1);
         }
         return minMaxMin;
     }
 
     return {
-        buildGridModel: function(posts) {
-            var minMaxMean = computeMinMaxMean(posts);
+        buildGridModel: function(tiles) {
+            var minMaxMean = computeMinMaxMean(tiles);
             var results = [];
-            posts.forEach(function(post){
+            tiles.forEach(function(post){
 
                 var sizes = [{
                     row: 1,
@@ -39,7 +39,7 @@ angular.module('app').factory('VideoTiles', function(){
                 var size = sizes[0];
                 if(post.likes < minMaxMean.MEAN){
                     size = sizes[0];
-                }else if(post.likes >= minMaxMean.MEAN && post.likes < (post.likes + (minMaxMean.MAX - minMaxMean.MIN) / 3)){
+                }else if(post.likes >= minMaxMean.MEAN && post.likes < minMaxMean.MEAN + minMaxMean.MIN){
                     size = sizes[1];
                 }else{
                     size = sizes[2];

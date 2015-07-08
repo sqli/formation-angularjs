@@ -5,5 +5,105 @@ section [icon]{
   fill: rgb(63,81,181);
 }
 .angular-leaflet-map{
-  height: 160px;
+  height: 100px;
+}
+article.img-caption{
+  float: left;
+  padding: 0px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  &.tile-size-1-1 {
+    .caption-text{
+      font-size: 120%;
+    }
+    img{
+      height: 100%;
+      width: 130%;
+      left: -15%;
+    }
+  }
+  &.tile-size-1-2 {
+    .caption-text{
+      font-size: 180%;
+    }
+    img{
+      width: 100%;
+      top: -25%
+    }
+  }
+  &.tile-size-2-2 {
+    .caption-text{
+      font-size: 240%;
+    }
+    img{
+      height: 100%;
+      width: 130%;
+      left: -15%;
+    }
+  }
+  img{
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    z-index: 4;
+    -webkit-transition:all 0.25s ease-in-out;
+    -moz-transition:all 0.25s ease-in-out;
+    -o-transition:all 0.25s ease-in-out;
+    -ms-transition:all 0.25s ease-in-out;
+    transition:all 0.25s ease-in-out;
+    position: absolute;
+  }
+  .caption{
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition:all 0.45s ease-in-out;
+    -moz-transition:all 0.45s ease-in-out;
+    -o-transition:all 0.45s ease-in-out;
+    -ms-transition:all 0.45s ease-in-out;
+    transition:all 0.45s ease-in-out;
+    height: 100%;
+    width: 100%;
+    .blur{
+      background-color: rgba(0,0,0,0.65);
+      height: 100%;
+      width: 100%;
+      z-index: 5;
+      position: absolute;
+    }
+    .caption-text{
+      z-index: 10;
+      color: #fff;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-weight: bold;
+      top: 30%;
+    }
+    h1{
+      text-transform: uppercase;
+      font-size: 24px;
+    }
+  }
+  &:hover{
+    img{
+      opacity: 1;
+      transform: scale(1.15,1.15);
+      -webkit-transform:scale(1.15,1.15);
+      -moz-transform:scale(1.15,1.15);
+      -ms-transform:scale(1.15,1.15);
+      -o-transform:scale(1.15,1.15);
+    }
+    .caption{
+      opacity: 1;
+    }
+  }
+}
+
+video{
+  width: 100%;
+  max-width: 600px;
 }

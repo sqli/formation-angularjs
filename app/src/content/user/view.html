@@ -1,11 +1,11 @@
-<md-content class="md-padding">
-    <div class="md-padding" layout-lg="row" layout-gt-lg="row" layout-wrap>
+<md-content>
+    <div layout-lg="row" layout-gt-lg="row" layout-wrap>
         <md-card flex-lg="99" flex-gt-lg="99">
             <leaflet ng-if="map" markers="map.markers" center="map.center"></leaflet>
         </md-card>
     </div>
 
-    <div class="md-padding" layout-lg="row" layout-gt-lg="row" layout-wrap>
+    <div layout-lg="row" layout-gt-lg="row" layout-wrap>
 
         <md-card flex-lg="30" flex-gt-lg="20">
             <img ng-src="{{user.image}}" class="md-card-image" alt="{{user.name}}">
@@ -35,23 +35,31 @@
 
     </div>
 
-    <div>
+    <md-card>
         <md-grid-list
-                md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+                md-cols-sm="1" md-cols-md="2" md-cols-gt-md="8"
                 md-row-height-gt-md="1:1" md-row-height="4:3"
                 md-gutter="8px" md-gutter-gt-sm="4px" >
-            <md-grid-tile ng-repeat="tile in tiles"
-                          md-rowspan="{{tile.size.row}}"
-                          md-colspan="{{tile.size.col}}"
-                          md-colspan-sm="1">
+            <md-grid-tile ng-repeat="tile in tiles" md-rowspan="{{tile.size.row}}" md-colspan="{{tile.size.col}}" md-colspan-sm="1">
+
                 <md-grid-tile-header>
                     <h3>{{tile.title}}</h3>
                 </md-grid-tile-header>
-                <video ng-if="tile.src" class="pull-right" controls>
-                    <source ng-src="{{transformUrl(tile.src)}}" type="video/mp4">
-                </video>
+
+                <article class="img-caption tile-size-{{tile.size.row}}-{{tile.size.col}}">
+
+                    <img ng-src="{{tile.thumbnail}}" alt="{{tile.title}}">
+
+                    <div class="caption" ng-click="showVideo($event, this)">
+                        <div class="blur"></div>
+                        <div class="caption-text">
+                            {{tile.title}}
+                        </div>
+                    </div>
+
+                </article>
+
             </md-grid-tile>
         </md-grid-list>
-    </div>
-
+    </md-card>
 </md-content>

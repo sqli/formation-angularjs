@@ -3,7 +3,6 @@
 var gulp = require('gulp');
 var open = require('open');
 var karma = require('gulp-karma');
-var angularProtractor = require('gulp-angular-protractor');
 var bower = require('./bower.json');
 var $ = require('gulp-load-plugins')();
 
