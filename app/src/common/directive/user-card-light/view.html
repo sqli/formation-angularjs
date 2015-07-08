@@ -1,0 +1,9 @@
+<image ng-src="{{user.image}}" class="md-avatar"/>
+<p class="md-list-item-text">{{user.name}}</p>
+
+<md-button ui-sref="user({id: user.id})" aria-label="{{'sidenav.open' | translate}}" layout="row">
+    <md-tooltip>
+        {{'sidenav.open' | translate}}
+    </md-tooltip>
+    <ng-md-icon icon="{{computeIcon(user.id)}}"></ng-md-icon>
+</md-button>
