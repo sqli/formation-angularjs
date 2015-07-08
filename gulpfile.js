@@ -9,7 +9,7 @@ gulp.task('clean', function () {
     return gulp.src(['dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('styles', ['clean'], function () {
+gulp.task('styles', function () {
 	return gulp.src('app/main.scss')
 		.pipe($.plumber())
 		.pipe($.sass())
@@ -20,13 +20,13 @@ gulp.task('styles', ['clean'], function () {
 gulp.task('i18n', function () {
     return gulp.src([
         'app/i18n/**/*json',
-    ]).pipe(gulp.dest('dist/i18n'));
+    ]).pipe(gulp.dest('dist/i18n/'));
 });
 
 gulp.task('stub', function () {
     return gulp.src([
         'app/stub/*.json'
-    ]).pipe(gulp.dest('dist/stub'));
+    ]).pipe(gulp.dest('dist/stub/'));
 });
 
 gulp.task('html', ['styles'], function () {
@@ -42,19 +42,19 @@ gulp.task('html', ['styles'], function () {
         .pipe(cssFilter.restore())
         .pipe(assets.restore())
         .pipe($.useref())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('template', function () {
     return gulp.src(['app/src/**/*.html']).pipe($.angularTemplatecache({
         module: 'app', root: 'src/'
-    })).pipe(gulp.dest('dist/scripts'));
+    })).pipe(gulp.dest('dist/scripts/'));
 });
 
-gulp.task('dist', ['i18n', 'stub', 'html', 'template']);
+gulp.task('dist', ['clean', 'html', 'template', 'i18n', 'stub']);
 
 gulp.task('deploy', ['dist'], function () {
-    return gulp.src('dist/**/*').pipe($.deploy({
+    return gulp.src('dist/**/*').pipe($.ghPages({
         remoteUrl: bower.repository.url
     }));
 });
