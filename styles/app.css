@@ -1,0 +1,8 @@
+md-toolbar [icon] {
+  fill: white; }
+
+section [icon] {
+  fill: #3f51b5; }
+
+.angular-leaflet-map {
+  height: 160px; }
