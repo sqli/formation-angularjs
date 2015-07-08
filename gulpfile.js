@@ -2,6 +2,8 @@
 
 var gulp = require('gulp');
 var open = require('open');
+var karma = require('gulp-karma');
+var angularProtractor = require('gulp-angular-protractor');
 var bower = require('./bower.json');
 var $ = require('gulp-load-plugins')();
 
@@ -53,10 +55,14 @@ gulp.task('template', function () {
 
 gulp.task('dist', ['clean', 'html', 'template', 'i18n', 'stub']);
 
-gulp.task('deploy', ['dist'], function () {
+gulp.task('deploy', ['test', 'dist'], function () {
     return gulp.src('dist/**/*').pipe($.ghPages({
         remoteUrl: bower.repository.url
     }));
+});
+
+gulp.task('test:unit', function () {
+    return gulp.src('not-exist.js').pipe($.plumber()).pipe($.karma({configFile: 'karma.conf.js'}));
 });
 
 gulp.task('serve:app', ['styles'], function () {

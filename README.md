@@ -12,3 +12,10 @@
 ## Ecosystem
 - [AngularJS](https://angularjs.org/)
 - [Angular Material](https://material.angularjs.org/)
+
+## Test
+- Unit : gulp test:unit
+- e2e :
+    webdriver-manager start
+    gulp serve
+    protractor protractor.config.js
