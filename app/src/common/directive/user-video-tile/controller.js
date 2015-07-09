@@ -1,4 +1,4 @@
-angular.module('app').controller('userVideoTileCtrl', function($scope, $mdDialog, $sce){
+angular.module('app').controller('UserVideoTileCtrl', function($scope, $mdDialog, $sce){
 
     $scope.close = function(){
         $mdDialog.hide();

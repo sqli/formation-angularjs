@@ -1,18 +1,12 @@
-<md-dialog aria-label="{{tile.title}}">
-    <form>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>{{tile.title}}</h2>
-                <span flex></span>
-                <md-button ng-click="close()" class="md-primary" aria-label="{{'user.tile.dialog.exit' | translate}}">
-                    <ng-md-icon icon="close"></ng-md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
-        <md-dialog-content>
-            <video ng-if="tile.src" controls>
-                <source ng-src="{{transformUrl(tile.src)}}" type="video/mp4">
-            </video>
-        </md-dialog-content>
-    </form>
-</md-dialog>
+<article class="img-caption tile-size-{{tile.size.row}}-{{tile.size.col}}">
+
+    <img ng-src="{{tile.thumbnail}}" alt="{{tile.title}}">
+
+    <div class="caption" ng-click="showVideo($event, this)">
+        <div class="blur"></div>
+        <div class="caption-text">
+            {{tile.title}}
+        </div>
+    </div>
+
+</article>

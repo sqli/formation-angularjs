@@ -1,6 +1,6 @@
 angular.module('app').controller('UserCtrl',
 
-    function(settings, $scope, User, $stateParams, $mdToast, $translate, Map, VideoTiles, $mdDialog){
+    function(settings, $scope, User, $stateParams, $mdToast, $translate, Map, VideoTiles){
 
         User.get({id: $stateParams.id}).$promise.then(function(user){
             $scope.user = user;
@@ -30,19 +30,6 @@ angular.module('app').controller('UserCtrl',
                         .position(settings.toast.position)
                         .hideDelay(settings.toast.hideDelay)
                 );
-            });
-        };
-
-        $scope.showVideo = function(ev, scope){
-            $mdDialog.show({
-                controller: 'userVideoTileCtrl',
-                templateUrl: 'src/common/directive/user-video-tile/view.html',
-                parent: angular.element(document.body),
-                scope: scope,
-                targetEvent: ev,
-            })
-            .then(function() {
-
             });
         };
 

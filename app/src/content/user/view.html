@@ -5,24 +5,29 @@
         </md-card>
     </div>
 
-    <div layout-lg="row" layout-gt-lg="row" layout-wrap>
+    <div layout-md="row" layout-gt-md="row" layout-lg="row" layout-gt-lg="row" layout-wrap>
 
-        <md-card flex-lg="30" flex-gt-lg="20">
+        <md-card flex-md flex-gt-md="40" flex-lg="30" flex-gt-lg="20">
             <img ng-src="{{user.image}}" class="md-card-image" alt="{{user.name}}">
             <md-card-content>
-                <h2 class="md-title">
-                    {{user.name}}
-                    <ng-md-icon icon="{{user.performance | performance}}"></ng-md-icon>
-                </h2>
-                <p>{{user.age}} {{'user.age.label' | translate}}</p>
+                <p>
+                    <strong>{{user.name}}</strong>
+                </p>
             </md-card-content>
         </md-card>
 
-        <md-card flex-lg="69" flex-gt-lg="79">
+        <md-card flex-md flex-gt-md flex-lg flex-gt-lg="30">
             <md-card-content layout="column">
-                <h1>{{'user.card.title' | translate}}</h1>
-                <p>{{user.description}}</p>
-                <div class="md-actions" layout="row" layout-align="end end">
+                <h2>
+                    {{'user.card.title' | translate}}
+                </h2>
+                <p>
+                    {{user.age}} {{'user.age.label' | translate}}
+                    <br/>
+                    {{'user.performance.label' | translate}}
+                    <ng-md-icon icon="{{user.performance | performance}}"></ng-md-icon>
+                </p>
+                <div class="md-actions" layout="column" layout-align="start end">
                     <md-button class="md-raised" ng-click="action1()">
                         {{'user.action.1.label' | translate}}
                     </md-button>
@@ -30,6 +35,12 @@
                         {{'user.action.2.label' | translate}}
                     </md-button>
                 </div>
+            </md-card-content>
+        </md-card>
+
+        <md-card flex-gt-lg="49" layout-wrap>
+            <md-card-content>
+                <p>{{user.description}}</p>
             </md-card-content>
         </md-card>
 
@@ -41,24 +52,7 @@
                 md-row-height-gt-md="1:1" md-row-height="4:3"
                 md-gutter="8px" md-gutter-gt-sm="4px" >
             <md-grid-tile ng-repeat="tile in tiles" md-rowspan="{{tile.size.row}}" md-colspan="{{tile.size.col}}" md-colspan-sm="1">
-
-                <md-grid-tile-header>
-                    <h3>{{tile.title}}</h3>
-                </md-grid-tile-header>
-
-                <article class="img-caption tile-size-{{tile.size.row}}-{{tile.size.col}}">
-
-                    <img ng-src="{{tile.thumbnail}}" alt="{{tile.title}}">
-
-                    <div class="caption" ng-click="showVideo($event, this)">
-                        <div class="blur"></div>
-                        <div class="caption-text">
-                            {{tile.title}}
-                        </div>
-                    </div>
-
-                </article>
-
+                <div user-video-tile="tile"></div>
             </md-grid-tile>
         </md-grid-list>
     </md-card>

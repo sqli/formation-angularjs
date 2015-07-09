@@ -21,6 +21,9 @@ angular.module('app').factory('VideoTiles', function(){
 
     return {
         buildGridModel: function(tiles) {
+            if(!tiles){
+                return [];
+            }
             var minMaxMean = computeMinMaxMean(tiles);
             var results = [];
             tiles.forEach(function(post){

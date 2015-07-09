@@ -1,5 +1,11 @@
 <md-toolbar layout="row">
     <div class="md-toolbar-tools" layout="row">
+        <md-button ng-click="toggleSidenav('left')" hide-gt-sm aria-label="{{'common.toogle.label' | translate}}">
+            <md-tooltip>
+                {{'common.toogle.label' | translate}}
+            </md-tooltip>
+            <ng-md-icon icon="view_headline" size="30"></ng-md-icon>
+        </md-button>
         <md-button ui-sref="home" aria-label="{{'common.link.home.label' | translate}}">
             <md-tooltip>
                 {{'common.link.home.label' | translate}}
@@ -7,12 +13,6 @@
             <ng-md-icon icon="home" size="30"></ng-md-icon>
         </md-button>
         <h1>{{'common.navbar.title' | translate}}</h1>
-        <md-button ng-click="toggleSidenav('left')" hide-gt-sm aria-label="{{'common.toogle.label' | translate}}">
-            <md-tooltip>
-                {{'common.toogle.label' | translate}}
-            </md-tooltip>
-            <ng-md-icon icon="view_headline" size="30"></ng-md-icon>
-        </md-button>
     </div>
 </md-toolbar>
 <section layout="row" flex>
