@@ -6,6 +6,12 @@ section [icon] {
 
 .angular-leaflet-map {
   height: 100px; }
+  .angular-leaflet-map .leaflet-top, .angular-leaflet-map .leaflet-bottom {
+    z-index: 8; }
+
+a ng-md-icon, button ng-md-icon {
+  position: absolute;
+  top: 0px; }
 
 article.img-caption {
   float: left;

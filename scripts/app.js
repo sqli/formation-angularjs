@@ -182,6 +182,9 @@ angular.module('app').factory('VideoTiles', function(){
 
     return {
         buildGridModel: function(tiles) {
+            if(!tiles){
+                return [];
+            }
             var minMaxMean = computeMinMaxMean(tiles);
             var results = [];
             tiles.forEach(function(post){
@@ -239,7 +242,31 @@ angular.module('app').directive('userCardLight', function($stateParams){
         }
     }
 });
-angular.module('app').controller('userVideoTileCtrl', function($scope, $mdDialog, $sce){
+angular.module('app').directive('userVideoTile', function($mdDialog){
+    return {
+        restrict: 'A',
+        templateUrl: 'src/common/directive/user-video-tile/view.html',
+        replace: true,
+        scope: {
+            tile: '=userVideoTile'
+        },
+        link: function(scope){
+            scope.showVideo = function(ev, $scope){
+                $mdDialog.show({
+                    controller: 'UserVideoTileCtrl',
+                    templateUrl: 'src/common/directive/user-video-tile/dialog.html',
+                    parent: angular.element(document.body),
+                    scope: $scope,
+                    targetEvent: ev
+                })
+                .then(function() {
+
+                });
+            };
+        }
+    };
+});
+angular.module('app').controller('UserVideoTileCtrl', function($scope, $mdDialog, $sce){
 
     $scope.close = function(){
         $mdDialog.hide();
@@ -302,7 +329,7 @@ angular.module('app').controller('HomeCtrl', function($scope, $interval){
 });
 angular.module('app').controller('UserCtrl',
 
-    function(settings, $scope, User, $stateParams, $mdToast, $translate, Map, VideoTiles, $mdDialog){
+    function(settings, $scope, User, $stateParams, $mdToast, $translate, Map, VideoTiles){
 
         User.get({id: $stateParams.id}).$promise.then(function(user){
             $scope.user = user;
@@ -332,19 +359,6 @@ angular.module('app').controller('UserCtrl',
                         .position(settings.toast.position)
                         .hideDelay(settings.toast.hideDelay)
                 );
-            });
-        };
-
-        $scope.showVideo = function(ev, scope){
-            $mdDialog.show({
-                controller: 'userVideoTileCtrl',
-                templateUrl: 'src/common/directive/user-video-tile/view.html',
-                parent: angular.element(document.body),
-                scope: scope,
-                targetEvent: ev,
-            })
-            .then(function() {
-
             });
         };
 
